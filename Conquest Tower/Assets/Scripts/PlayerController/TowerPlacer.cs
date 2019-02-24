@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TowerPlacer : MonoBehaviour
 {
-
-
+    //Test
+    public GameObject Testers;
     //knapper
     public GameObject SellBut;
     public GameObject Upgradebut;
@@ -29,9 +29,18 @@ public class TowerPlacer : MonoBehaviour
     }
 
     // Update is called once per frame
+
+   
+
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Chosen != null)
+        {
+
+            Chosen.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+
+        }
+            if (Input.GetButtonDown("Fire1"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -44,6 +53,7 @@ public class TowerPlacer : MonoBehaviour
                 if (hit.point.y < 1f && CanBuild)
                 {
                     Instantiate(Chosen, hit.point, Quaternion.identity);
+
                 }
 
                 if (hit.transform.tag == "Tower")
@@ -70,11 +80,18 @@ public class TowerPlacer : MonoBehaviour
         public void placeLaserTower()
         {
             Chosen = LaserTower;
+
         }
 
         public void placeArcherTower()
         {
             Chosen = ArcherTower;
-        }
-    
+       
+    }
+
+  
+
+
+
+
 }
