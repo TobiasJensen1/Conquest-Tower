@@ -22,6 +22,7 @@ public class TowerShooter : MonoBehaviour
         if (collider.gameObject.CompareTag("Ground"))
         {
             print("SKyd for faaanden");
+            collider.GetComponentInChildren<TextMesh>().text = "0";
         }
     }
 }
