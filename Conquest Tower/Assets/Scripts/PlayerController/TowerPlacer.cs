@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class TowerPlacer : MonoBehaviour
 {
@@ -18,80 +20,103 @@ public class TowerPlacer : MonoBehaviour
     private GameObject Chosen;
     Ray placement;
     Vector3 clickPosition;
+    //Information text
+    public Text text;
+
+
 
     // Start is called before the first frame update
-    void Start() { 
-   
+    void Start()
+    {
+
         CanBuild = true;
-      
+
         SellBut.SetActive(false);
         Upgradebut.SetActive(false);
+
     }
 
     // Update is called once per frame
 
-   
+
 
     void Update()
     {
+        //Future use
         if (Chosen != null)
         {
 
             Chosen.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
 
         }
-            if (Input.GetButtonDown("Fire1"))
+
+        choseTowerPositionText(Chosen);
+
+
+        if (Input.GetButtonDown("Fire1"))
         {
+
+
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
             {
                 clickPosition = hit.point;
-                print(hit.point);
-                print("hallo");
+
                 if (hit.point.y < 1f && CanBuild)
                 {
-                    Instantiate(Chosen, hit.point, Quaternion.identity);
+                    if (Chosen != null)
+                    {
+                        Instantiate(Chosen, hit.point, Quaternion.identity);
+                        placerText(Chosen);
+                    }
+
+
+                    Chosen = null;
 
                 }
 
-                if (hit.transform.tag == "Tower")
-                {
-                    //poppe knapper op "upgrade" "Sell" "info om tower"
-                    print("Tower siger hej");
-                    CanBuild = false;
-                    Upgradebut.transform.position = new Vector3(hit.transform.position.x - 20, hit.transform.position.y + 10, hit.transform.position.z);
-                    SellBut.transform.position = new Vector3(hit.transform.position.x + 20, hit.transform.position.y + 10, hit.transform.position.z);
-                    SellBut.SetActive(true);
-                    Upgradebut.SetActive(true);
 
-                }
-                else if(hit.transform.tag == "Untagged")
-                {
-                SellBut.SetActive(false);
-                Upgradebut.SetActive(false);
-                CanBuild = true;
             }
-            }
-        }
-
-    }
-        public void placeLaserTower()
-        {
-            Chosen = LaserTower;
 
         }
+    }
+    public void placeLaserTower()
+    {
+        Chosen = LaserTower;
 
-        public void placeArcherTower()
-        {
-            Chosen = ArcherTower;
-       
     }
 
-  
+    public void placeArcherTower()
+    {
+        Chosen = ArcherTower;
+
+    }
 
 
+    public void placerText(GameObject Chosen)
+    {
+        if (Chosen == LaserTower)
+        {
+            text.text = "Laser Tower Placed!";
+        }
+        if (Chosen == ArcherTower)
+        {
+            text.text = "Archer Tower Placed!";
+        }
+    }
 
-
+    public void choseTowerPositionText(GameObject Chosen)
+    {
+        if (Chosen == LaserTower)
+        {
+            text.text = "Click where you want to place a Laser Tower!";
+        }
+        if (Chosen == ArcherTower)
+        {
+            text.text = "Click where you want to place an Archer Tower!";
+        }
+    }
 }

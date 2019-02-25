@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class NpcMove : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class NpcMove : MonoBehaviour
     NavMeshAgent _navMeshAgent;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
+
+
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
 
         if(_navMeshAgent == null)
@@ -36,4 +40,7 @@ public class NpcMove : MonoBehaviour
             _navMeshAgent.SetDestination(targetVector);
         }
     }
+
+
+
 }
