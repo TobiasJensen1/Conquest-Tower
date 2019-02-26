@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2561218911037416543}
   - component: {fileID: 5767240119242816765}
   - component: {fileID: 17216732106085982}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ArcherTower 1
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4498245375787798589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: -4.5354686, y: 40, z: -1.6058028}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4689644804660533466}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 3491624114655811584}
   - component: {fileID: 6921811731925811104}
   - component: {fileID: 8885016335374398139}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ArcherRange
   m_TagString: TowerRange
   m_Icon: {fileID: 0}

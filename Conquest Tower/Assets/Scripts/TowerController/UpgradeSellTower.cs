@@ -40,9 +40,9 @@ public class UpgradeSellTower : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            int distance = 50000;
+            
 
-            if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Tower")))
+            if (Physics.Raycast(ray, out hit))
             {
                 clickPosition = hit.point;
 
