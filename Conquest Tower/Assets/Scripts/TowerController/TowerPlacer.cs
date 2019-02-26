@@ -76,15 +76,9 @@ public class TowerPlacer : MonoBehaviour
                     GetComponent<UpgradeSellTower>().enabled = true;
                     
                     
-                    Chosen = null;
-                    print(CanUpgrade +"true");
-                    
-                    
+                    Chosen = null; 
                 }
-
-
             }
-
         }
     }
     public void placeLaserTower()

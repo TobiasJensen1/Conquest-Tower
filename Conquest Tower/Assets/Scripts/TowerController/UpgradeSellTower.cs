@@ -45,30 +45,26 @@ public class UpgradeSellTower : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 clickPosition = hit.point;
-
-                print(hit.collider.tag);
-                print(hit.transform.tag);
                
                 if (hit.transform.tag == "Tower" && CanUpgradenew)
                 {
                     //poppe knapper op "upgrade" "Sell" "info om tower"
-                    print("Tower siger hej");
                     CanBuild = false;
-                    Upgradebut.transform.position = new Vector3(hit.transform.position.x - 20, hit.transform.position.y + 10, hit.transform.position.z);
-                    SellBut.transform.position = new Vector3(hit.transform.position.x + 20, hit.transform.position.y + 10, hit.transform.position.z);
+                    Upgradebut.transform.position = new Vector3(hit.transform.position.x - 5, hit.transform.position.y + 10, hit.transform.position.z + 3);
+                    SellBut.transform.position = new Vector3(hit.transform.position.x + 5, hit.transform.position.y + 10, hit.transform.position.z + 3);
                     SellBut.SetActive(true);
                     Upgradebut.SetActive(true);
-                    
+                    print(hit.transform.tag);
                 }
-                
-            }
-            else
-            {
-                SellBut.SetActive(false);
-                Upgradebut.SetActive(false);
+                else
+                {
+                    SellBut.SetActive(false);
+                    Upgradebut.SetActive(false);
 
-                CanBuild = true;
+                    CanBuild = true;
+                }
             }
+            
         }
     }
 
