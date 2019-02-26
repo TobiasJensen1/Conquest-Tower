@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 6921811731925811104}
   m_Layer: 0
   m_Name: ArcherRange
-  m_TagString: Untagged
+  m_TagString: TowerRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

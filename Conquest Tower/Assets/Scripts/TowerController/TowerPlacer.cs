@@ -16,6 +16,7 @@ public class TowerPlacer : MonoBehaviour
     public GameObject LaserTower;
     //til klikke kode
     bool CanBuild = false;
+    public bool CanUpgrade = false;
     public Camera camera;
     private GameObject Chosen;
     Ray placement;
@@ -30,7 +31,7 @@ public class TowerPlacer : MonoBehaviour
     {
 
         CanBuild = true;
-
+        CanUpgrade = false;
         SellBut.SetActive(false);
         Upgradebut.SetActive(false);
 
@@ -49,15 +50,13 @@ public class TowerPlacer : MonoBehaviour
             Chosen.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
 
         }
-
+ 
+        //Current use
         choseTowerPositionText(Chosen);
-
+        
 
         if (Input.GetButtonDown("Fire1"))
         {
-
-
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -72,10 +71,15 @@ public class TowerPlacer : MonoBehaviour
                         Instantiate(Chosen, hit.point, Quaternion.identity);
                         placerText(Chosen);
                     }
+                    CanUpgrade = true;
 
-
+                    GetComponent<UpgradeSellTower>().enabled = true;
+                    
+                    
                     Chosen = null;
-
+                    print(CanUpgrade +"true");
+                    
+                    
                 }
 
 
@@ -86,12 +90,20 @@ public class TowerPlacer : MonoBehaviour
     public void placeLaserTower()
     {
         Chosen = LaserTower;
+        CanUpgrade = false;
+        GetComponent<UpgradeSellTower>().enabled = false;
+        SellBut.SetActive(false);
+        Upgradebut.SetActive(false);
 
     }
 
     public void placeArcherTower()
     {
         Chosen = ArcherTower;
+        CanUpgrade = false;
+        GetComponent<UpgradeSellTower>().enabled = false;
+        SellBut.SetActive(false);
+        Upgradebut.SetActive(false);
 
     }
 

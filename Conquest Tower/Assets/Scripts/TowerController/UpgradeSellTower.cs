@@ -12,17 +12,29 @@ public class UpgradeSellTower : MonoBehaviour
     public GameObject Upgradebut;
 
     bool CanBuild = false;
+    bool CanUpgradenew;
+    
 
     // Start is called before the first frame update
     void Start()
     {
 
+        
+
+    }
+
+     void OnEnable()
+    {
+        GameObject towercontroller = GameObject.Find("TowerController");
+        TowerPlacer towerplacer = towercontroller.GetComponent<TowerPlacer>();
+        CanUpgradenew = towerplacer.CanUpgrade;
+        print(CanUpgradenew + "Upgrade start");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        print(CanUpgradenew);
         if (Input.GetButtonDown("Fire1"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -31,11 +43,11 @@ public class UpgradeSellTower : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 clickPosition = hit.point;
-                print(hit.point);
-                print("hallo");
 
-
-                if (hit.transform.tag == "Tower")
+                print(hit.transform.tag);
+                print(CanUpgradenew);
+                print("test" + GetComponent<TowerPlacer>().ArcherTower.transform.GetChild(0).tag);
+                if (hit.transform.tag == "Tower" && CanUpgradenew)
                 {
                     //poppe knapper op "upgrade" "Sell" "info om tower"
                     print("Tower siger hej");
@@ -44,16 +56,21 @@ public class UpgradeSellTower : MonoBehaviour
                     SellBut.transform.position = new Vector3(hit.transform.position.x + 20, hit.transform.position.y + 10, hit.transform.position.z);
                     SellBut.SetActive(true);
                     Upgradebut.SetActive(true);
-
+                    
                 }
-                else if (hit.transform.tag == "Untagged")
+                else
                 {
                     SellBut.SetActive(false);
                     Upgradebut.SetActive(false);
+                    
                     CanBuild = true;
                 }
             }
         }
     }
+
+    
+
+    
 }
 
