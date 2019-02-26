@@ -40,13 +40,15 @@ public class UpgradeSellTower : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            int distance = 50000;
+
+            if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Tower")))
             {
                 clickPosition = hit.point;
 
+                print(hit.collider.tag);
                 print(hit.transform.tag);
-                print(CanUpgradenew);
-                print("test" + GetComponent<TowerPlacer>().ArcherTower.transform.GetChild(0).tag);
+               
                 if (hit.transform.tag == "Tower" && CanUpgradenew)
                 {
                     //poppe knapper op "upgrade" "Sell" "info om tower"
@@ -58,13 +60,14 @@ public class UpgradeSellTower : MonoBehaviour
                     Upgradebut.SetActive(true);
                     
                 }
-                else
-                {
-                    SellBut.SetActive(false);
-                    Upgradebut.SetActive(false);
-                    
-                    CanBuild = true;
-                }
+                
+            }
+            else
+            {
+                SellBut.SetActive(false);
+                Upgradebut.SetActive(false);
+
+                CanBuild = true;
             }
         }
     }

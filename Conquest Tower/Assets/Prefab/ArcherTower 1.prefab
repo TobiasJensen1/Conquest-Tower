@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2561218911037416543}
   - component: {fileID: 5767240119242816765}
   - component: {fileID: 17216732106085982}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ArcherTower 1
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4498245375787798589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.029756, y: 40, z: 2.5183995}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4689644804660533466}
@@ -165,8 +165,8 @@ GameObject:
   - component: {fileID: 4689644804660533466}
   - component: {fileID: 460388871509386287}
   - component: {fileID: 3491624114655811584}
-  - component: {fileID: 9152972030388086303}
   - component: {fileID: 6921811731925811104}
+  - component: {fileID: 8885016335374398139}
   m_Layer: 0
   m_Name: ArcherRange
   m_TagString: TowerRange
@@ -182,7 +182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4505037075186114825}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.7, z: 0}
   m_LocalScale: {x: 15, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 3796042465661915811}
@@ -233,20 +233,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &9152972030388086303
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505037075186114825}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &6921811731925811104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +245,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcbfcf08a2f706419317fe8e8382c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &8885016335374398139
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4505037075186114825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
