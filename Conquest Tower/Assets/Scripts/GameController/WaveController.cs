@@ -28,8 +28,6 @@ public class WaveController : MonoBehaviour
 
     public void initiateWave()
     {
-        print("initiate");
-        print(npcAmount);
         for (int i = 0; i < npcAmount; i++)
         {
             Instantiate(Npc, transform.position, Quaternion.identity);

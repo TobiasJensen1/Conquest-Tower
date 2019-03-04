@@ -28,13 +28,11 @@ public class UpgradeSellTower : MonoBehaviour
         GameObject towercontroller = GameObject.Find("TowerController");
         TowerPlacer towerplacer = towercontroller.GetComponent<TowerPlacer>();
         CanUpgradenew = towerplacer.CanUpgrade;
-        print(CanUpgradenew + "Upgrade start");
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(CanUpgradenew);
         if (Input.GetButtonDown("Fire1"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

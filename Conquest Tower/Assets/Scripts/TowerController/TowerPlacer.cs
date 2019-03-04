@@ -23,6 +23,13 @@ public class TowerPlacer : MonoBehaviour
     Vector3 clickPosition;
     //Information text
     public Text text;
+    //Obstruction Check
+    public NavMeshAgent spawnPosition;
+    Transform targetPosition;
+    bool pathAvailable;
+    NavMeshPath navMeshPath;
+    List<GameObject> placedTowers = new List<GameObject>();
+    GameObject recent;
 
 
 
@@ -34,6 +41,11 @@ public class TowerPlacer : MonoBehaviour
         CanUpgrade = false;
         SellBut.SetActive(false);
         Upgradebut.SetActive(false);
+
+        navMeshPath = new NavMeshPath();
+        targetPosition = GameObject.FindGameObjectWithTag("End").transform;
+
+        InvokeRepeating("CheckPath", 0f, 0.1f);
 
     }
 
@@ -53,7 +65,8 @@ public class TowerPlacer : MonoBehaviour
  
         //Current use
         choseTowerPositionText(Chosen);
-        
+
+        print(CalculateNewPath());
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -68,8 +81,11 @@ public class TowerPlacer : MonoBehaviour
                 {
                     if (Chosen != null)
                     {
-                        Instantiate(Chosen, hit.point, Quaternion.identity);
-                        placerText(Chosen);
+
+                        recent = Instantiate(Chosen, hit.point, Quaternion.identity);
+                        placedTowers.Add(recent);
+                            placerText(Chosen);
+                        }
                     }
                     CanUpgrade = true;
 
@@ -80,7 +96,7 @@ public class TowerPlacer : MonoBehaviour
                 }
             }
         }
-    }
+    
     public void placeLaserTower()
     {
         Chosen = LaserTower;
@@ -99,6 +115,32 @@ public class TowerPlacer : MonoBehaviour
         SellBut.SetActive(false);
         Upgradebut.SetActive(false);
 
+    }
+
+    bool CalculateNewPath()
+    {
+        spawnPosition.CalculatePath(targetPosition.position, navMeshPath);
+        print("New path calculated");
+        if (navMeshPath.status != NavMeshPathStatus.PathComplete)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    void CheckPath()
+    {
+        if (!CalculateNewPath())
+        {
+            GameObject destroy = placedTowers[placedTowers.Count-1];
+            Destroy(destroy);
+            text.text = "Path Blocked!";
+            placedTowers.RemoveAt(placedTowers.Count - 1);
+
+        }
     }
 
 
