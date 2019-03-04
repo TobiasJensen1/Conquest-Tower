@@ -7,7 +7,7 @@ public class TrackingSystem : MonoBehaviour
 {
     public float speed = 3.0f;
 
-    GameObject _target = null;
+    public GameObject _target;
     Vector3 _lastKnownPosition = Vector3.zero;
     Quaternion _lookAtRotation;
 
