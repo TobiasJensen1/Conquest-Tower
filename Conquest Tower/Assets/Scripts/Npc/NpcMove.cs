@@ -27,13 +27,19 @@ public class NpcMove : MonoBehaviour
         }
         else
         {
-            SetDestination();
+            InvokeRepeating("SetDestination", 0f, 1f);
         }
             
     }
-    
-    private void SetDestination()
+
+    void Update()
     {
+
+    }
+
+        private void SetDestination()
+    {
+        print("set");
         if(_destination != null)
         {
             Vector3 targetVector = _destination.transform.position;

@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherTower : MonoBehaviour
+public class TurretBehaviour : MonoBehaviour
 {
-
-    private Transform target;
+    //Target
+    private Transform target = null;
     private Transform targetEnemy;
-    public float range = 10f;
+    //Fire
+    public Transform bulletSpawn;
+    public Rigidbody turretBullet;
+    [Header("Optional")]
+    public float bulletSpeed = 10f;
+    public float range = 15f;
     public float turnSpeed = 10f;
+    public GameObject parent;
+
 
     public string enemyTag = "Ground";
-  
+
 
     // Start is called before the first frame update
 
@@ -19,6 +26,8 @@ public class ArcherTower : MonoBehaviour
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating("FireTest", 1f, 1.5f);
+
     }
 
 
@@ -58,16 +67,30 @@ public class ArcherTower : MonoBehaviour
             target = null;
         }
 
+        
     }
 
     void LockOnTarget()
     {
+        
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        Vector3 rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+        
     }
 
 
+    void FireTest()
+    {
+        if(target != null)
+        {
+            Rigidbody bulletClone = Instantiate(turretBullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+            bulletClone.velocity = transform.forward * bulletSpeed;
+            
+            
+        }
+    }
 
+    
 }

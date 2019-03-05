@@ -28,7 +28,7 @@ public class TowerPlacer : MonoBehaviour
     Transform targetPosition;
     bool pathAvailable;
     NavMeshPath navMeshPath;
-    List<GameObject> placedTowers = new List<GameObject>();
+    public List<GameObject> placedTowers = new List<GameObject>();
     GameObject recent;
 
 
@@ -65,8 +65,6 @@ public class TowerPlacer : MonoBehaviour
  
         //Current use
         choseTowerPositionText(Chosen);
-
-        print(CalculateNewPath());
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -119,16 +117,18 @@ public class TowerPlacer : MonoBehaviour
 
     bool CalculateNewPath()
     {
-        spawnPosition.CalculatePath(targetPosition.position, navMeshPath);
-        print("New path calculated");
-        if (navMeshPath.status != NavMeshPathStatus.PathComplete)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        
+            spawnPosition.CalculatePath(targetPosition.position, navMeshPath);
+            print("New path calculated");
+            if (navMeshPath.status != NavMeshPathStatus.PathComplete)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        
     }
 
     void CheckPath()

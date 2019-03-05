@@ -13,7 +13,15 @@ public class UpgradeSellTower : MonoBehaviour
 
     bool CanBuild = false;
     bool CanUpgradenew;
-    
+
+
+    //Tower Range
+    SpriteRenderer sprite;
+    List<GameObject> placedTowers = new List<GameObject>();
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +36,7 @@ public class UpgradeSellTower : MonoBehaviour
         GameObject towercontroller = GameObject.Find("TowerController");
         TowerPlacer towerplacer = towercontroller.GetComponent<TowerPlacer>();
         CanUpgradenew = towerplacer.CanUpgrade;
+        placedTowers = towerplacer.placedTowers;
     }
 
     // Update is called once per frame
@@ -38,7 +47,10 @@ public class UpgradeSellTower : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            
+            for (int i = 0; i < placedTowers.Count; i++)
+            {
+                placedTowers[i].gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+            }
 
             if (Physics.Raycast(ray, out hit))
             {
@@ -47,9 +59,11 @@ public class UpgradeSellTower : MonoBehaviour
                 if (hit.transform.tag == "Tower" && CanUpgradenew)
                 {
                     //poppe knapper op "upgrade" "Sell" "info om tower"
+                    SpriteRenderer sprite = hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                    sprite.enabled = true;
                     CanBuild = false;
                     Upgradebut.transform.position = new Vector3(hit.transform.position.x - 5, hit.transform.position.y + 10, hit.transform.position.z + 3);
-                    SellBut.transform.position = new Vector3(hit.transform.position.x + 5, hit.transform.position.y + 10, hit.transform.position.z + 3);
+                    SellBut.transform.position = new Vector3(hit.transform.position.x + 7, hit.transform.position.y + 10, hit.transform.position.z + 3);
                     SellBut.SetActive(true);
                     Upgradebut.SetActive(true);
                     print(hit.transform.tag);
@@ -58,16 +72,16 @@ public class UpgradeSellTower : MonoBehaviour
                 {
                     SellBut.SetActive(false);
                     Upgradebut.SetActive(false);
-
+                    
                     CanBuild = true;
                 }
             }
             
         }
     }
-
     
 
-    
+
+
 }
 
