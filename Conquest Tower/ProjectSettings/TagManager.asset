@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - TowerRange
   - End
+  - TurretHitbox
   layers:
   - Default
   - TransparentFX

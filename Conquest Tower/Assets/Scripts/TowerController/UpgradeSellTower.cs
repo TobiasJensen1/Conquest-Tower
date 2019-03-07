@@ -56,17 +56,17 @@ public class UpgradeSellTower : MonoBehaviour
             {
                 clickPosition = hit.point;
                
-                if (hit.transform.tag == "Tower" && CanUpgradenew)
+                if ((hit.transform.tag == "Tower" && CanUpgradenew) && (hit.collider.gameObject.transform.tag != "TurretHitbox"))
                 {
                     //poppe knapper op "upgrade" "Sell" "info om tower"
                     SpriteRenderer sprite = hit.collider.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                    print(hit.collider.gameObject.transform.GetChild(0));
                     sprite.enabled = true;
                     CanBuild = false;
                     Upgradebut.transform.position = new Vector3(hit.transform.position.x - 5, hit.transform.position.y + 10, hit.transform.position.z + 3);
                     SellBut.transform.position = new Vector3(hit.transform.position.x + 7, hit.transform.position.y + 10, hit.transform.position.z + 3);
                     SellBut.SetActive(true);
                     Upgradebut.SetActive(true);
-                    print(hit.transform.tag);
                 }
                 else
                 {

@@ -30,6 +30,10 @@ public class TowerPlacer : MonoBehaviour
     NavMeshPath navMeshPath;
     public List<GameObject> placedTowers = new List<GameObject>();
     GameObject recent;
+    GameObject towerToPlace;
+    public Material objColor;
+    public Material BarrelColor;
+    
 
 
 
@@ -41,7 +45,6 @@ public class TowerPlacer : MonoBehaviour
         CanUpgrade = false;
         SellBut.SetActive(false);
         Upgradebut.SetActive(false);
-
         navMeshPath = new NavMeshPath();
         targetPosition = GameObject.FindGameObjectWithTag("End").transform;
 
@@ -55,41 +58,81 @@ public class TowerPlacer : MonoBehaviour
 
     void Update()
     {
-        //Future use
-        if (Chosen != null)
-        {
 
-            Chosen.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
-
-        }
- 
-        //Current use
         choseTowerPositionText(Chosen);
+        
+        Ray rayFirst = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitFirst;
+        
+        if (Physics.Raycast(rayFirst, out hitFirst)){
 
-        if (Input.GetButtonDown("Fire1"))
+            Vector3 clickPosition1 = hitFirst.point;
+            
+            if(towerToPlace != null)
+            {
+                SpriteRenderer sprite = Chosen.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                towerToPlace.transform.position = new Vector3(hitFirst.point.x, 0f, hitFirst.point.z);
+                Renderer rendTurret = towerToPlace.transform.GetComponent<Renderer>();
+                Renderer rendTop = towerToPlace.transform.GetChild(1).GetComponent<Renderer>();
+                Renderer rendBarrel = towerToPlace.transform.GetChild(1).transform.GetChild(0).GetComponent<Renderer>();
+                sprite.color = new Color(1, 1, 1, .3f);
+                
+                sprite.enabled = true;
+                if (hitFirst.transform.tag == "Tower" || hitFirst.transform.tag == "Ground")
+                {
+                    
+                    
+                    rendTurret.material.SetColor("_Color", Color.red);
+                    rendTop.material.SetColor("_Color", Color.red);
+                    rendBarrel.material.SetColor("_Color", Color.red);
+                } else
+                {
+                    
+                    rendTurret.material = objColor;
+                    rendTop.material = BarrelColor;
+                    rendBarrel.material = BarrelColor;
+                }
+                
+                
+                
+                
+
+                    
+            }   
+        }
+        
+
+        /*
+         * SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite.color = new Color(1,1,1, .3f);*/
+
+
+
+            if (Input.GetButtonDown("Fire1"))
         {
+            Destroy(towerToPlace);
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
+           
             if (Physics.Raycast(ray, out hit))
             {
+             
                 clickPosition = hit.point;
-
-                if (hit.point.y < 1f && CanBuild)
+                if (CanBuild)
                 {
-                    if (Chosen != null)
-                    {
 
-                        recent = Instantiate(Chosen, hit.point, Quaternion.identity);
+                    print(hit.transform.tag);
+                    if (Chosen != null && hit.transform.tag != "Tower" && hit.transform.tag != "Ground")
+                    {
+                        recent = Instantiate(Chosen, new Vector3(hit.point.x, 0f, hit.point.z), Quaternion.identity);
+                        recent.transform.gameObject.transform.GetChild(2).transform.gameObject.layer = 9;
                         placedTowers.Add(recent);
-                            placerText(Chosen);
+                        placerText(Chosen);
                         }
                     }
                     CanUpgrade = true;
-
                     GetComponent<UpgradeSellTower>().enabled = true;
-                    
-                    
                     Chosen = null; 
                 }
             }
@@ -98,6 +141,7 @@ public class TowerPlacer : MonoBehaviour
     public void placeLaserTower()
     {
         Chosen = LaserTower;
+        
         CanUpgrade = false;
         GetComponent<UpgradeSellTower>().enabled = false;
         SellBut.SetActive(false);
@@ -108,6 +152,11 @@ public class TowerPlacer : MonoBehaviour
     public void placeArcherTower()
     {
         Chosen = ArcherTower;
+        towerToPlace = Instantiate(Chosen);
+        towerToPlace.layer = 2;
+        towerToPlace.GetComponent<BoxCollider>().enabled = false;
+        towerToPlace.transform.gameObject.transform.GetChild(1).GetComponent<TurretBehaviour>().enabled = false;
+        towerToPlace.GetComponent<NavMeshObstacle>().enabled = false;
         CanUpgrade = false;
         GetComponent<UpgradeSellTower>().enabled = false;
         SellBut.SetActive(false);
@@ -168,3 +217,4 @@ public class TowerPlacer : MonoBehaviour
         }
     }
 }
+ 

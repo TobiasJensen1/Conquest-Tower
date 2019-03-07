@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3736875761234345901, guid: abc3189a5d00c874bb99af3569cce9a2,
         type: 3}
       propertyPath: m_Name
-      value: Turret
+      value: Turret Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5336644686638960908, guid: abc3189a5d00c874bb99af3569cce9a2,
         type: 3}
@@ -72,8 +72,24 @@ PrefabInstance:
       propertyPath: bulletSpawn
       value: 
       objectReference: {fileID: 5452243278638283060}
+    - target: {fileID: 698830890687472052, guid: abc3189a5d00c874bb99af3569cce9a2,
+        type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 2300749491668905135}
+    - target: {fileID: 6036428861161592802, guid: abc3189a5d00c874bb99af3569cce9a2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abc3189a5d00c874bb99af3569cce9a2, type: 3}
+--- !u!1 &2300749491668905135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3736875761234345901, guid: abc3189a5d00c874bb99af3569cce9a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3184585680285471490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5452243278638283060 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7465747253337582134, guid: abc3189a5d00c874bb99af3569cce9a2,
