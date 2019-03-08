@@ -8,9 +8,15 @@ public class WaveController : MonoBehaviour
 
     public GameObject Npc;
     public GameObject button;
+
+
+    public Text waveText;
+    public GameObject tc;
+    PlayerInfo playerinfo;
     [SerializeField]
     private int npcAmount;
     private int wave = 1;
+    private int waveCount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +24,14 @@ public class WaveController : MonoBehaviour
         wave = 1;
         button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
         npcAmount = 1;
+
+        playerinfo = GetComponent<PlayerInfo>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        waveText.text = "Wave " + waveCount;
     }
 
 
@@ -67,10 +75,14 @@ public class WaveController : MonoBehaviour
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
             button.GetComponent<Button>().interactable = true;
         }
+        tc.GetComponent<PlayerInfo>().Coins += 100;
+        
+        
     }
 
     IEnumerator startWave2()
     {
+        waveCount++;
         if (wave == 2)
         {
             npcAmount = 5;
@@ -85,11 +97,13 @@ public class WaveController : MonoBehaviour
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
             button.GetComponent<Button>().interactable = true;
         }
-
+        tc.GetComponent<PlayerInfo>().Coins += 300;
+        
     }
 
     IEnumerator startWave3()
     {
+        waveCount++;
         if (wave == 3)
         {
             npcAmount = 10;
@@ -104,10 +118,12 @@ public class WaveController : MonoBehaviour
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
             button.GetComponent<Button>().interactable = true;
         }
-
+        tc.GetComponent<PlayerInfo>().Coins += 700;
+        
     }
     IEnumerator startWave4()
     {
+        waveCount++;
         if (wave == 4)
         {
             npcAmount = 15;
@@ -122,10 +138,12 @@ public class WaveController : MonoBehaviour
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
             button.GetComponent<Button>().interactable = true;
         }
-
+        tc.GetComponent<PlayerInfo>().Coins += 1050;
+        
     }
     IEnumerator startWave5()
     {
+        waveCount++;
         if (wave == 5)
         {
             npcAmount = 20;
@@ -140,6 +158,7 @@ public class WaveController : MonoBehaviour
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
             button.GetComponent<Button>().interactable = true;
         }
-
+        tc.GetComponent<PlayerInfo>().Coins += 1543785;
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CannonBehaviour : MonoBehaviour
 {
@@ -10,27 +11,23 @@ public class CannonBehaviour : MonoBehaviour
     //Fire
     public Transform CannonBallSpawn;
     public Rigidbody CannonBall;
+
+
     [Header("Optional")]
     public float CannonBallSpeed = 10f;
     public float range = 15f;
     public float turnSpeed = 10f;
-
+    public float level = 1;
 
     public string enemyTag = "Ground";
 
 
     // Start is called before the first frame update
-
-
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
-        InvokeRepeating("FireTest", 1f, 1.5f);
-
+        InvokeRepeating("FireTest", 0.5f, 1.5f);
     }
-
-
-
 
     // Update is called once per frame
     void Update()
@@ -86,10 +83,6 @@ public class CannonBehaviour : MonoBehaviour
         {
             Rigidbody bulletClone = Instantiate(CannonBall, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
             bulletClone.velocity = transform.forward * CannonBallSpeed;
-            
-            
         }
     }
-
-    
 }

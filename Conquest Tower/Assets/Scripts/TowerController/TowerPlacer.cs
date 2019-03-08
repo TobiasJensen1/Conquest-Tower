@@ -6,11 +6,7 @@ using UnityEngine.UI;
 
 public class TowerPlacer : MonoBehaviour
 {
-    //Test
-    public GameObject Testers;
-    //knapper
-    public GameObject SellBut;
-    public GameObject Upgradebut;
+
     //Towers
     public GameObject Cannon;
     public GameObject LaserTower;
@@ -33,7 +29,10 @@ public class TowerPlacer : MonoBehaviour
     GameObject towerToPlace;
     public Material objColor;
     public Material BarrelColor;
-    
+
+    SpriteRenderer sprite;
+
+
 
 
 
@@ -43,8 +42,6 @@ public class TowerPlacer : MonoBehaviour
 
         CanBuild = true;
         CanUpgrade = false;
-        SellBut.SetActive(false);
-        Upgradebut.SetActive(false);
         navMeshPath = new NavMeshPath();
         targetPosition = GameObject.FindGameObjectWithTag("End").transform;
 
@@ -73,7 +70,7 @@ public class TowerPlacer : MonoBehaviour
             if (towerToPlace != null && Chosen == Cannon)
             {
 
-                SpriteRenderer sprite = Chosen.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                sprite = Chosen.transform.GetChild(0).GetComponent<SpriteRenderer>();
                 towerToPlace.transform.position = new Vector3(hitFirst.point.x, 0f, hitFirst.point.z);
                 Renderer rendTurret = towerToPlace.transform.GetComponent<Renderer>();
                 Renderer rendTop = towerToPlace.transform.GetChild(1).GetComponent<Renderer>();
@@ -101,20 +98,23 @@ public class TowerPlacer : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
         {
+           
             Destroy(towerToPlace);
-
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-           
+            
             if (Physics.Raycast(ray, out hit))
             {
-             
+                
                 clickPosition = hit.point;
                 if (CanBuild)
                 {
                     if (Chosen != null && hit.transform.tag != "Tower" && hit.transform.tag != "Ground")
                     {
                         recent = Instantiate(Chosen, new Vector3(hit.point.x, -0.5f, hit.point.z), Quaternion.identity);
+                        sprite = recent.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                        sprite.enabled = false;
                         recent.transform.gameObject.transform.GetChild(2).transform.gameObject.layer = 9;
                         placedTowers.Add(recent);
                         placerText(Chosen);
@@ -139,8 +139,6 @@ public class TowerPlacer : MonoBehaviour
         towerToPlace.GetComponent<NavMeshObstacle>().enabled = false;
         CanUpgrade = false;
         GetComponent<UpgradeSellTower>().enabled = false;
-        SellBut.SetActive(false);
-        Upgradebut.SetActive(false);
     }
 
 

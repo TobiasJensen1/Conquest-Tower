@@ -26,7 +26,7 @@ public class CannonTowerInformation : MonoBehaviour
     void OnMouseOver()
     {
    
-        sprite.SetActive(true);
+        
         
         text.text = "Cannon";
         titleText.text = "Cannon";
@@ -36,6 +36,7 @@ public class CannonTowerInformation : MonoBehaviour
 
     void OnMouseExit()
     {
-        sprite.SetActive(false);
+        text.text = "";
+        titleText.text = "";
     }
 }
