@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretBehaviour : MonoBehaviour
+public class CannonBehaviour : MonoBehaviour
 {
     //Target
     private Transform target = null;
     private Transform targetEnemy;
     //Fire
-    public Transform bulletSpawn;
-    public Rigidbody turretBullet;
+    public Transform CannonBallSpawn;
+    public Rigidbody CannonBall;
     [Header("Optional")]
-    public float bulletSpeed = 10f;
+    public float CannonBallSpeed = 10f;
     public float range = 15f;
     public float turnSpeed = 10f;
-    public GameObject parent;
 
 
     public string enemyTag = "Ground";
@@ -85,8 +84,8 @@ public class TurretBehaviour : MonoBehaviour
     {
         if(target != null)
         {
-            Rigidbody bulletClone = Instantiate(turretBullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-            bulletClone.velocity = transform.forward * bulletSpeed;
+            Rigidbody bulletClone = Instantiate(CannonBall, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
+            bulletClone.velocity = transform.forward * CannonBallSpeed;
             
             
         }
