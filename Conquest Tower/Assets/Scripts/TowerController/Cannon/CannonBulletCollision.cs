@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretBulletCollision : MonoBehaviour
+public class CannonBulletCollision : MonoBehaviour
 {
 
     float health;
@@ -43,6 +43,10 @@ public class TurretBulletCollision : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+
+        Destroy(this.gameObject, 5);
+
+        
         
     }
     

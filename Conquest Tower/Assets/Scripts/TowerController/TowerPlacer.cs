@@ -63,40 +63,40 @@ public class TowerPlacer : MonoBehaviour
         
         Ray rayFirst = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitFirst;
-        
-        if (Physics.Raycast(rayFirst, out hitFirst)){
+
+        if (Physics.Raycast(rayFirst, out hitFirst))
+        {
 
             Vector3 clickPosition1 = hitFirst.point;
 
 
-            if(towerToPlace != null && Chosen == Cannon)
+            if (towerToPlace != null && Chosen == Cannon)
             {
-                
-                
-                SpriteRenderer sprite = towerToPlace.transform.GetChild(4).GetComponent<SpriteRenderer>();
+
+                SpriteRenderer sprite = Chosen.transform.GetChild(0).GetComponent<SpriteRenderer>();
                 towerToPlace.transform.position = new Vector3(hitFirst.point.x, 0f, hitFirst.point.z);
-                Renderer CannonBase = towerToPlace.transform.GetChild(0).GetComponent<Renderer>();
-                Renderer CannonBarrel = towerToPlace.transform.GetChild(1).GetComponent<Renderer>();
-                Renderer CannonBall = towerToPlace.transform.GetChild(2).GetComponent<Renderer>();
-                
+                Renderer rendTurret = towerToPlace.transform.GetComponent<Renderer>();
+                Renderer rendTop = towerToPlace.transform.GetChild(1).GetComponent<Renderer>();
+                Renderer rendBarrel = towerToPlace.transform.GetChild(1).transform.GetChild(0).GetComponent<Renderer>();
                 sprite.color = new Color(1, 1, 1, .3f);
-                
+
                 sprite.enabled = true;
                 if (hitFirst.transform.tag == "Tower" || hitFirst.transform.tag == "Ground")
                 {
 
 
-                    CannonBase.material.SetColor("_Color", Color.red);
-                    CannonBarrel.material.SetColor("_Color", Color.red);
-                    CannonBall.material.SetColor("_Color", Color.red);
-                } else
+                    rendTurret.material.SetColor("_Color", Color.red);
+                    rendTop.material.SetColor("_Color", Color.red);
+                    rendBarrel.material.SetColor("_Color", Color.red);
+                }
+                else
                 {
 
-                    CannonBase.material = objColor;
-                    CannonBarrel.material = BarrelColor;
-                    CannonBall.material = BarrelColor;
-                }                    
-            }   
+                    rendTurret.material = objColor;
+                    rendTop.material = BarrelColor;
+                    rendBarrel.material = BarrelColor;
+                }
+            }
         }
 
             if (Input.GetButtonDown("Fire1"))
@@ -112,12 +112,10 @@ public class TowerPlacer : MonoBehaviour
                 clickPosition = hit.point;
                 if (CanBuild)
                 {
-
-                    print(hit.transform.tag);
                     if (Chosen != null && hit.transform.tag != "Tower" && hit.transform.tag != "Ground")
                     {
                         recent = Instantiate(Chosen, new Vector3(hit.point.x, -0.5f, hit.point.z), Quaternion.identity);
-                        recent.transform.gameObject.transform.GetChild(5).transform.gameObject.layer = 9;
+                        recent.transform.gameObject.transform.GetChild(2).transform.gameObject.layer = 9;
                         placedTowers.Add(recent);
                         placerText(Chosen);
                         }
@@ -128,33 +126,24 @@ public class TowerPlacer : MonoBehaviour
                 }
             }
         }
-    
-    public void placeLaserTower()
-    {
-        Chosen = LaserTower;
-        
-        CanUpgrade = false;
-        GetComponent<UpgradeSellTower>().enabled = false;
-        SellBut.SetActive(false);
-        Upgradebut.SetActive(false);
-
-    }
+   
 
     public void placeCannonTower()
     {
+
         Chosen = Cannon;
         towerToPlace = Instantiate(Chosen);
         towerToPlace.layer = 2;
         towerToPlace.GetComponent<BoxCollider>().enabled = false;
-        towerToPlace.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour2>().enabled = false;
-        towerToPlace.transform.gameObject.transform.GetChild(0).GetComponent<NavMeshObstacle>().enabled = false;
-        towerToPlace.transform.gameObject.transform.GetChild(0).GetComponent<NavMeshObstacle>().enabled = false;
+        towerToPlace.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().enabled = false;
+        towerToPlace.GetComponent<NavMeshObstacle>().enabled = false;
         CanUpgrade = false;
         GetComponent<UpgradeSellTower>().enabled = false;
         SellBut.SetActive(false);
         Upgradebut.SetActive(false);
-
     }
+
+
 
     bool CalculateNewPath()
     {
@@ -187,10 +176,6 @@ public class TowerPlacer : MonoBehaviour
 
     public void placerText(GameObject Chosen)
     {
-        if (Chosen == LaserTower)
-        {
-            text.text = "Laser Tower Placed!";
-        }
         if (Chosen == Cannon)
         {
             text.text = "Cannon Placed!";
@@ -199,14 +184,11 @@ public class TowerPlacer : MonoBehaviour
 
     public void choseTowerPositionText(GameObject Chosen)
     {
-        if (Chosen == LaserTower)
-        {
-            text.text = "Click where you want to place a Laser Tower!";
-        }
         if (Chosen == Cannon)
         {
             text.text = "Click where you want to place a Cannon!";
         }
     }
 }
+ 
  

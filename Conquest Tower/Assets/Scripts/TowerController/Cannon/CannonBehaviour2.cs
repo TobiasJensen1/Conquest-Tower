@@ -69,6 +69,7 @@ public class CannonBehaviour2 : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
             transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+            
 
         }
 
