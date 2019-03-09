@@ -81,8 +81,10 @@ public class CannonBehaviour : MonoBehaviour
     {
         if(target != null)
         {
+            GetComponent<AudioSource>().Play();
             Rigidbody bulletClone = Instantiate(CannonBall, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
             bulletClone.velocity = transform.forward * CannonBallSpeed;
+            
         }
     }
 }

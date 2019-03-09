@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class WaveController : MonoBehaviour
 {
 
+    public AudioClip WaveHorn;
+
     public GameObject Npc;
     public GameObject button;
 
@@ -26,6 +28,7 @@ public class WaveController : MonoBehaviour
         npcAmount = 1;
 
         playerinfo = GetComponent<PlayerInfo>();
+      GetComponent<AudioSource>().clip = WaveHorn;
     }
 
     // Update is called once per frame
@@ -61,15 +64,23 @@ public class WaveController : MonoBehaviour
 
     IEnumerator startWave1()
     {
-
+        GetComponent<AudioSource>().Play();
         if (wave == 1)
         {
             npcAmount = 2;
             button.GetComponent<Button>().interactable = false;
             for (int i = 0; i < npcAmount; i++)
             {
-                Instantiate(Npc, transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(2);    
+          
+               GameObject newSpider = Instantiate(Npc, transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(0.1f);
+                newSpider.GetComponent<Animation>().Play("jump");
+                yield return new WaitForSeconds(1.1f);
+                newSpider.GetComponent<Animation>().Play("run");
+
+                yield return new WaitForSeconds(2);
+                
+               
             }
             wave++;
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
@@ -83,6 +94,7 @@ public class WaveController : MonoBehaviour
     IEnumerator startWave2()
     {
         waveCount++;
+        GetComponent<AudioSource>().Play();
         if (wave == 2)
         {
             npcAmount = 5;
@@ -104,6 +116,7 @@ public class WaveController : MonoBehaviour
     IEnumerator startWave3()
     {
         waveCount++;
+        GetComponent<AudioSource>().Play();
         if (wave == 3)
         {
             npcAmount = 10;
@@ -124,6 +137,7 @@ public class WaveController : MonoBehaviour
     IEnumerator startWave4()
     {
         waveCount++;
+        GetComponent<AudioSource>().Play();
         if (wave == 4)
         {
             npcAmount = 15;
@@ -144,6 +158,7 @@ public class WaveController : MonoBehaviour
     IEnumerator startWave5()
     {
         waveCount++;
+        GetComponent<AudioSource>().Play();
         if (wave == 5)
         {
             npcAmount = 20;
