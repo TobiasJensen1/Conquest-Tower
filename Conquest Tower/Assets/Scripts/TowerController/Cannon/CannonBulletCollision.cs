@@ -64,11 +64,7 @@ public class CannonBulletCollision : MonoBehaviour
                 
                 collision.gameObject.GetComponent<Animation>().Play("death1");
                 collision.gameObject.GetComponent<NavMeshAgent>().speed = 0;
-                
-
-
-               
-                
+                     
                     collision.gameObject.GetComponent<NpcStats>().health = 0;
                 collision.gameObject.tag = "End";
 
