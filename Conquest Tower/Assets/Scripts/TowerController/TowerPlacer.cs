@@ -32,6 +32,8 @@ public class TowerPlacer : MonoBehaviour
 
     SpriteRenderer sprite;
 
+    //Playerinfo 
+    PlayerInfo playerinfo;
 
 
 
@@ -46,6 +48,8 @@ public class TowerPlacer : MonoBehaviour
         targetPosition = GameObject.FindGameObjectWithTag("End").transform;
 
         InvokeRepeating("CheckPath", 0f, 0.1f);
+
+        playerinfo = GetComponent<PlayerInfo>();
 
     }
 
@@ -110,9 +114,10 @@ public class TowerPlacer : MonoBehaviour
                 clickPosition = hit.point;
                 if (CanBuild)
                 {
-                    if (Chosen != null && hit.transform.tag != "Tower" && hit.transform.tag != "Ground")
+                    if (Chosen != null && hit.transform.tag != "Tower" && hit.transform.tag != "Ground" && playerinfo.Coins >= 50)
                     {
                         recent = Instantiate(Chosen, new Vector3(hit.point.x, -0.5f, hit.point.z), Quaternion.identity);
+                        playerinfo.Coins -= 50;
                         sprite = recent.transform.GetChild(0).GetComponent<SpriteRenderer>();
                         sprite.enabled = false;
                         recent.transform.gameObject.transform.GetChild(2).transform.gameObject.layer = 9;
@@ -165,6 +170,7 @@ public class TowerPlacer : MonoBehaviour
         {
             GameObject destroy = placedTowers[placedTowers.Count-1];
             Destroy(destroy);
+            playerinfo.Coins += 50;
             text.text = "Path Blocked!";
             placedTowers.RemoveAt(placedTowers.Count - 1);
 

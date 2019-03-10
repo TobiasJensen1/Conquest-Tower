@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NpcStats : MonoBehaviour
 {
-    public float health = 2;
+    public float health = 10;
 
 
     // Start is called before the first frame update

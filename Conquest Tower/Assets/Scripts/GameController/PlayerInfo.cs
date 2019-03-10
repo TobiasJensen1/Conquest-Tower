@@ -21,7 +21,7 @@ public class PlayerInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthText.text = Health + "/100";
+        HealthText.text = Health + "/10";
         CoinsText.text = "" + Coins;
     }
 }

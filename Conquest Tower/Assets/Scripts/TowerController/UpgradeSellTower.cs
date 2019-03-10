@@ -159,7 +159,7 @@ public class UpgradeSellTower : MonoBehaviour
         text.enabled = true;
         text.text = "Cannon" +
 
-        "\n\nLevel: "+ tower.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().level + "/ 3" +
+        "\n\nLevel: "+ tower.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().level + " / 3" +
 
         "\n\nDamage: "+ chosenTower.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().CannonBall.GetComponent<CannonBulletCollision>().damage+"" +
 

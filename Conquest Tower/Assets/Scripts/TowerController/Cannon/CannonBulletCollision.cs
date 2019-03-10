@@ -7,7 +7,7 @@ public class CannonBulletCollision : MonoBehaviour
 {
 
     float health;
-    public float damage = 5f;
+    public float damage = 1f;
 
     public GameObject Explosion;
 
