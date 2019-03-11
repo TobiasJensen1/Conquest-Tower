@@ -276,7 +276,7 @@ Transform:
   m_GameObject: {fileID: 5910781221863564314}
   m_LocalRotation: {x: 0, y: -0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.06999999, z: 0.309}
-  m_LocalScale: {x: 1, y: -5, z: 1}
+  m_LocalScale: {x: 0.5, y: -5, z: 0.5}
   m_Children:
   - {fileID: 8699974669954788004}
   m_Father: {fileID: 1605544843309072422}
@@ -576,6 +576,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CannonBallSpawn: {fileID: 8699974669954788004}
   CannonBall: {fileID: 7604346269843084478, guid: 16ab81f3d79149f4b91fe8f8eb77d945,
+    type: 3}
+  CannonBall1: {fileID: 7604346269843084478, guid: fab1c521a95dbce41ba176d3a14523dd,
+    type: 3}
+  CannonBall2: {fileID: 7604346269843084478, guid: 779d8daeed00b014a8ad06cd6e8c64bb,
     type: 3}
   CannonBallSpeed: 85
   range: 13

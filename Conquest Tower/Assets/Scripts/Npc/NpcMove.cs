@@ -11,13 +11,16 @@ public class NpcMove : MonoBehaviour
     Transform _destination;
 
     NavMeshAgent _navMeshAgent;
+    PlayerInfo playerinfo;
+    
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        GameObject tc = GameObject.Find("TowerController");
+        playerinfo = tc.GetComponent<PlayerInfo>();
 
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
 
@@ -34,7 +37,7 @@ public class NpcMove : MonoBehaviour
 
     void Update()
     {
-
+        DestinationReached();
     }
 
         private void SetDestination()
@@ -44,6 +47,15 @@ public class NpcMove : MonoBehaviour
         {
             Vector3 targetVector = _destination.transform.position;
             _navMeshAgent.SetDestination(targetVector);
+        }
+    }
+
+    private void DestinationReached()
+    {
+        if(_navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance == 0)
+        {
+            playerinfo.Health -= 1;
+            Destroy(gameObject);
         }
     }
 

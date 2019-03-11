@@ -12,11 +12,10 @@ public class CannonBulletCollision : MonoBehaviour
     public GameObject Explosion;
 
 
-
     // Start is called before the first frame update
     void Start()
     {
-        
+  
     }
 
     // Update is called once per frame
@@ -61,12 +60,15 @@ public class CannonBulletCollision : MonoBehaviour
 
             if(collision.gameObject.GetComponent<NpcStats>().health <= 0)
             {
-                
+               
                 collision.gameObject.GetComponent<Animation>().Play("death1");
                 collision.gameObject.GetComponent<NavMeshAgent>().speed = 0;
                      
                     collision.gameObject.GetComponent<NpcStats>().health = 0;
+                collision.gameObject.transform.GetChild(10).transform.GetComponent<TextMesh>().gameObject.SetActive(false);
+
                 collision.gameObject.tag = "End";
+                
 
                 Destroy(collision.gameObject,2);
 

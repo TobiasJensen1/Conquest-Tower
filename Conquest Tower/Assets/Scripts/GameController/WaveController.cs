@@ -13,6 +13,7 @@ public class WaveController : MonoBehaviour
 
 
     public Text waveText;
+    public Text informationText;
     public GameObject tc;
     PlayerInfo playerinfo;
     [SerializeField]
@@ -67,18 +68,15 @@ public class WaveController : MonoBehaviour
         GetComponent<AudioSource>().Play();
         if (wave == 1)
         {
+            informationText.text = "Wave 1 Incoming!";
             npcAmount = 2;
             button.GetComponent<Button>().interactable = false;
             for (int i = 0; i < npcAmount; i++)
             {
           
                GameObject newSpider = Instantiate(Npc, transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(0.1f);
-                newSpider.GetComponent<Animation>().Play("jump");
-                yield return new WaitForSeconds(1.1f);
-                newSpider.GetComponent<Animation>().Play("run");
 
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(2f);
                 
                
             }
@@ -93,6 +91,7 @@ public class WaveController : MonoBehaviour
 
     IEnumerator startWave2()
     {
+        informationText.text = "Wave 2 Incoming!";
         waveCount++;
         GetComponent<AudioSource>().Play();
         if (wave == 2)
@@ -103,7 +102,7 @@ public class WaveController : MonoBehaviour
             for (int i = 0; i < npcAmount; i++)
             {
                 Instantiate(Npc, transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1f);
             }
             wave++;
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
@@ -115,6 +114,7 @@ public class WaveController : MonoBehaviour
 
     IEnumerator startWave3()
     {
+        informationText.text = "Wave 3 Incoming!";
         waveCount++;
         GetComponent<AudioSource>().Play();
         if (wave == 3)
@@ -125,7 +125,7 @@ public class WaveController : MonoBehaviour
             for (int i = 0; i < npcAmount; i++)
             {
                 Instantiate(Npc, transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
             }
             wave++;
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
@@ -136,6 +136,7 @@ public class WaveController : MonoBehaviour
     }
     IEnumerator startWave4()
     {
+        informationText.text = "Wave 4 Incoming!";
         waveCount++;
         GetComponent<AudioSource>().Play();
         if (wave == 4)
@@ -146,10 +147,10 @@ public class WaveController : MonoBehaviour
             for (int i = 0; i < npcAmount; i++)
             {
                 Instantiate(Npc, transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
             }
             wave++;
-            button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
+            button.GetComponentInChildren<Text>().text = "Final Wave";
             button.GetComponent<Button>().interactable = true;
         }
         tc.GetComponent<PlayerInfo>().Coins += 1050;
@@ -157,6 +158,7 @@ public class WaveController : MonoBehaviour
     }
     IEnumerator startWave5()
     {
+        informationText.text = "Final Wave Incoming!";
         waveCount++;
         GetComponent<AudioSource>().Play();
         if (wave == 5)
@@ -167,11 +169,11 @@ public class WaveController : MonoBehaviour
             for (int i = 0; i < npcAmount; i++)
             {
                 Instantiate(Npc, transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
             }
-            wave++;
-            button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
-            button.GetComponent<Button>().interactable = true;
+            //wave++;
+            //button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
+            button.GetComponent<Button>().interactable = false;
         }
         tc.GetComponent<PlayerInfo>().Coins += 1543785;
         

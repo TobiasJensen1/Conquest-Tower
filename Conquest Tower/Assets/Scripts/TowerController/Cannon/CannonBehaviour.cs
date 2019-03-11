@@ -11,6 +11,8 @@ public class CannonBehaviour : MonoBehaviour
     //Fire
     public Transform CannonBallSpawn;
     public Rigidbody CannonBall;
+    public Rigidbody CannonBall1;
+    public Rigidbody CannonBall2;
 
 
     [Header("Optional")]
@@ -82,8 +84,22 @@ public class CannonBehaviour : MonoBehaviour
         if(target != null)
         {
             GetComponent<AudioSource>().Play();
-            Rigidbody bulletClone = Instantiate(CannonBall, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
-            bulletClone.velocity = transform.forward * CannonBallSpeed;
+            if (level == 1)
+            {
+                print("1");
+                Rigidbody bulletClone = Instantiate(CannonBall, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
+                bulletClone.velocity = transform.forward * CannonBallSpeed;
+            }
+            if(level == 2)
+            {
+                Rigidbody bulletClone = Instantiate(CannonBall1, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
+                bulletClone.velocity = transform.forward * CannonBallSpeed;
+            }
+            if(level == 3)
+            {
+                Rigidbody bulletClone = Instantiate(CannonBall2, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
+                bulletClone.velocity = transform.forward * CannonBallSpeed;
+            }
             
         }
     }

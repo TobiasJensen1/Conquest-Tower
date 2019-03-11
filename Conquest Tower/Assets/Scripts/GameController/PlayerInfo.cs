@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
@@ -23,5 +24,14 @@ public class PlayerInfo : MonoBehaviour
     {
         HealthText.text = Health + "/10";
         CoinsText.text = "" + Coins;
+        GameOver();
+    }
+
+    void GameOver()
+    {
+        if(Health <= 0)
+        {
+            SceneManager.LoadScene("ConquestTower");
+        }
     }
 }
