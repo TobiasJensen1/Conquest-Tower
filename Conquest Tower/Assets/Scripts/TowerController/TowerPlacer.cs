@@ -9,7 +9,7 @@ public class TowerPlacer : MonoBehaviour
 
     //Towers
     public GameObject Cannon;
-    public GameObject LaserTower;
+    public GameObject Mage;
     //til klikke kode
     bool CanBuild = false;
     public bool CanUpgrade = false;
@@ -27,8 +27,13 @@ public class TowerPlacer : MonoBehaviour
     public List<GameObject> placedTowers = new List<GameObject>();
     GameObject recent;
     GameObject towerToPlace;
-    public Material objColor;
-    public Material BarrelColor;
+    public Material cannonColor;
+
+    public Material mageColor;
+
+    public AudioClip choose;
+    public AudioClip place;
+
 
     SpriteRenderer sprite;
 
@@ -71,7 +76,7 @@ public class TowerPlacer : MonoBehaviour
             Vector3 clickPosition1 = hitFirst.point;
 
 
-            if (towerToPlace != null && Chosen == Cannon)
+            if (towerToPlace != null && Chosen != null)
             {
 
                 sprite = Chosen.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -84,25 +89,31 @@ public class TowerPlacer : MonoBehaviour
                 sprite.enabled = true;
                 if (hitFirst.transform.tag == "Tower" || hitFirst.transform.tag == "Ground")
                 {
-
-
                     rendTurret.material.SetColor("_Color", Color.red);
                     rendTop.material.SetColor("_Color", Color.red);
                     rendBarrel.material.SetColor("_Color", Color.red);
                 }
                 else
                 {
-
-                    rendTurret.material = objColor;
-                    rendTop.material = BarrelColor;
-                    rendBarrel.material = BarrelColor;
+                    if (Chosen == Cannon)
+                    {
+                        rendTurret.material = cannonColor;
+                        rendTop.material = cannonColor;
+                        rendBarrel.material = cannonColor;
+                    }
+                    else
+                    {
+                        rendTurret.material = mageColor;
+                        rendTop.material = mageColor;
+                        rendBarrel.material = mageColor;
+                    }
                 }
             }
         }
 
             if (Input.GetButtonDown("Fire1"))
         {
-           
+            
             Destroy(towerToPlace);
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -116,7 +127,16 @@ public class TowerPlacer : MonoBehaviour
                 {
                     if (Chosen != null && hit.transform.tag != "Tower" && hit.transform.tag != "Ground" && playerinfo.Coins >= 50)
                     {
-                        recent = Instantiate(Chosen, new Vector3(hit.point.x, -0.5f, hit.point.z), Quaternion.identity);
+                        GetComponent<AudioSource>().clip = place;
+                        GetComponent<AudioSource>().Play();
+                        if (Chosen == Mage)
+                        {
+                            recent = Instantiate(Chosen, new Vector3(hit.point.x, 0f, hit.point.z), Quaternion.identity);
+                        }
+                        else
+                        {
+                            recent = Instantiate(Chosen, new Vector3(hit.point.x, -0.5f, hit.point.z), Quaternion.identity);
+                        }
                         playerinfo.Coins -= 50;
                         sprite = recent.transform.GetChild(0).GetComponent<SpriteRenderer>();
                         sprite.enabled = false;
@@ -135,12 +155,27 @@ public class TowerPlacer : MonoBehaviour
 
     public void placeCannonTower()
     {
-
+        GetComponent<AudioSource>().clip = choose;
+        GetComponent<AudioSource>().Play();
         Chosen = Cannon;
         towerToPlace = Instantiate(Chosen);
         towerToPlace.layer = 2;
         towerToPlace.GetComponent<BoxCollider>().enabled = false;
         towerToPlace.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().enabled = false;
+        towerToPlace.GetComponent<NavMeshObstacle>().enabled = false;
+        CanUpgrade = false;
+        GetComponent<UpgradeSellTower>().enabled = false;
+    }
+
+    public void placeMageTower()
+    {
+        GetComponent<AudioSource>().clip = choose;
+        GetComponent<AudioSource>().Play();
+        Chosen = Mage;
+        towerToPlace = Instantiate(Chosen);
+        towerToPlace.layer = 2;
+        towerToPlace.GetComponent<BoxCollider>().enabled = false;
+        towerToPlace.transform.gameObject.transform.GetChild(1).GetComponent<MageTowerBehaviour>().enabled = false;
         towerToPlace.GetComponent<NavMeshObstacle>().enabled = false;
         CanUpgrade = false;
         GetComponent<UpgradeSellTower>().enabled = false;
@@ -184,6 +219,10 @@ public class TowerPlacer : MonoBehaviour
         {
             text.text = "Cannon Placed!";
         }
+        if(Chosen == Mage)
+        {
+            text.text = "Mage Tower Placed!";
+        }
     }
 
     public void choseTowerPositionText(GameObject Chosen)
@@ -191,6 +230,10 @@ public class TowerPlacer : MonoBehaviour
         if (Chosen == Cannon)
         {
             text.text = "Click where you want to place a Cannon!";
+        }
+        if(Chosen == Mage)
+        {
+            text.text = "Click where you want to place a Mage Tower!";
         }
     }
 }

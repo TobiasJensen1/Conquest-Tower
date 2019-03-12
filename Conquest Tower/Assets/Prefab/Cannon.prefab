@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8699974669954788004}
   m_Layer: 2
   m_Name: CannonBallSpawn
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 5545508308444556711}
   m_Layer: 2
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 5865583339461887408}
   m_Layer: 2
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

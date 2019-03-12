@@ -13,6 +13,10 @@ public class CannonBulletCollision : MonoBehaviour
 
     public GameObject Explosion;
 
+    public AudioClip hit;
+    public AudioClip dead;
+    public AudioClip golem;
+
    
 
 
@@ -27,7 +31,7 @@ public class CannonBulletCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        
     }
     
     void OnCollisionEnter(Collision collision)
@@ -39,20 +43,24 @@ public class CannonBulletCollision : MonoBehaviour
             //Destroy(this.gameObject);
             this.gameObject.GetComponent<SphereCollider>().enabled = false;
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
-            Destroy(this.gameObject, 10);
+            Destroy(this.gameObject, 4);
         }
        
         //Hits Enemy
         if (collision.gameObject.tag == "Ground")
         {
-
-            float random = Random.Range(0, 20);
-
-            if (random == 5)
+            if(gameObject.name == "MageOrb(Clone)")
             {
-                GetComponent<AudioSource>().Play();
+                
                 Instantiate(Explosion, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
             }
+            GetComponent<AudioSource>().clip = hit;
+            if(collision.gameObject.name == "rockgolem(Clone)")
+            {
+                GetComponent<AudioSource>().clip = golem;
+            }
+
+            GetComponent<AudioSource>().Play();
 
 
             health = collision.gameObject.GetComponent<NpcStats>().health;
@@ -62,11 +70,13 @@ public class CannonBulletCollision : MonoBehaviour
 
             this.gameObject.GetComponent<SphereCollider>().enabled = false;
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
-            Destroy(this.gameObject,10);
+            Destroy(this.gameObject,0.5f);
 
             if(collision.gameObject.GetComponent<NpcStats>().health <= 0)
             {
-               
+                GetComponent<AudioSource>().clip = dead;
+                GetComponent<AudioSource>().Play();
+
                 collision.gameObject.GetComponent<Animation>().Play("death1");
                 collision.gameObject.GetComponent<NavMeshAgent>().speed = 0;
                 Instantiate(Coins, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
@@ -79,7 +89,7 @@ public class CannonBulletCollision : MonoBehaviour
 
               Destroy(collision.gameObject,2);
 
-                Destroy(collision.gameObject);
+                
             }
         }
 

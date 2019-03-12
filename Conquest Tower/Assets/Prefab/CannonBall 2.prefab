@@ -123,7 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 6
+  Coins: {fileID: 782740101382440384, guid: b6046632e57456041bb4c422ddcfba7c, type: 3}
   Explosion: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
+  hit: {fileID: 8300000, guid: 467e669ad7306ea4d8cd7a504a554e8d, type: 3}
+  dead: {fileID: 8300000, guid: 1cbac5881df459744a40b90071facc79, type: 3}
+  golem: {fileID: 8300000, guid: 48283d004c3965945b68334ed8a4a10d, type: 3}
 --- !u!82 &5883313551061522485
 AudioSource:
   m_ObjectHideFlags: 0

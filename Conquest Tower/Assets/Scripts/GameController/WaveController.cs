@@ -9,6 +9,7 @@ public class WaveController : MonoBehaviour
     public AudioClip WaveHorn;
 
     public GameObject Npc;
+    public GameObject boss;
     public GameObject button;
 
 
@@ -35,7 +36,14 @@ public class WaveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        waveText.text = "Wave " + waveCount;
+        if (wave == 5)
+        {
+            waveText.text = "Final Wave!";
+        }
+        else
+        {
+            waveText.text = "Wave " + waveCount;
+        }
     }
 
 
@@ -71,15 +79,17 @@ public class WaveController : MonoBehaviour
             informationText.text = "Wave 1 Incoming!";
             npcAmount = 2;
             button.GetComponent<Button>().interactable = false;
+            
             for (int i = 0; i < npcAmount; i++)
             {
-          
-               GameObject newSpider = Instantiate(Npc, transform.position, Quaternion.identity);
-
+                
+                Instantiate(Npc, transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(2f);
                 
                
             }
+            
+
             wave++;
             button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
             button.GetComponent<Button>().interactable = true;
@@ -166,16 +176,15 @@ public class WaveController : MonoBehaviour
             npcAmount = 20;
             button.GetComponent<Button>().interactable = false;
 
-            for (int i = 0; i < npcAmount; i++)
-            {
-                Instantiate(Npc, transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(1f);
-            }
-            //wave++;
-            //button.GetComponentInChildren<Text>().text = "Start Wave " + wave;
+
+            GameObject hej = Instantiate(boss, transform.position, Quaternion.identity);
+            hej.GetComponent<Animator>().Play("rockgolem_walk01");
+
+            
             button.GetComponent<Button>().interactable = false;
         }
         tc.GetComponent<PlayerInfo>().Coins += 1543785;
-        
+        yield return null;
     }
+
 }

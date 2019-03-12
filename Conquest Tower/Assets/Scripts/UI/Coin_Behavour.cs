@@ -19,7 +19,7 @@ public class Coin_Behavour : MonoBehaviour
 
         reachA = true;
         reachB = false;
-      MoveTo =  GameObject.Find("Canvas").transform.GetChild(5).transform;
+      MoveTo =  GameObject.Find("Canvas").transform.GetChild(6).transform;
         punkt = GameObject.Find("punkt").transform;
     }
 

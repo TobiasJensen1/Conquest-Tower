@@ -42,7 +42,6 @@ public class NpcMove : MonoBehaviour
 
         private void SetDestination()
     {
-        print("set");
         if(_destination != null)
         {
             Vector3 targetVector = _destination.transform.position;
@@ -52,11 +51,20 @@ public class NpcMove : MonoBehaviour
 
     private void DestinationReached()
     {
-        if(_navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance == 0)
+        if (_navMeshAgent.gameObject.name == "rockgolem(Clone)" && _navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= 1)
         {
-            playerinfo.Health -= 1;
-            Destroy(gameObject);
+            playerinfo.Health -= 1000;
         }
+        if (_navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= 1)
+        {
+            if (playerinfo.Health >= 0)
+            {
+                playerinfo.Health -= 1;
+                Destroy(gameObject);
+            }
+
+        }
+        
     }
 
 

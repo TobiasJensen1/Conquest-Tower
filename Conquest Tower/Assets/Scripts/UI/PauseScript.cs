@@ -23,10 +23,10 @@ public class PauseScript : MonoBehaviour
 
     public void StopPause()
     {
-        pause.SetActive(false);
-        gameObject.SetActive(false);
-        Pause_Start_UI.SetActive(false);
-        start_text.SetActive(false);
+        GetComponent<AudioSource>().Play();
+        
+        StartCoroutine("farvel");
+        
     }
 
     public void Retry()
@@ -36,5 +36,14 @@ public class PauseScript : MonoBehaviour
     public void Quit()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    IEnumerator farvel()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Pause_Start_UI.SetActive(false);
+        pause.SetActive(false);
+        gameObject.SetActive(false);
+        start_text.SetActive(false);
     }
 }

@@ -16,7 +16,7 @@ public class CannonBehaviour : MonoBehaviour
 
 
     [Header("Optional")]
-    public float CannonBallSpeed = 10f;
+    public float CannonBallSpeed = 85f;
     public float range = 15f;
     public float turnSpeed = 10f;
     public float level = 1;
@@ -86,7 +86,6 @@ public class CannonBehaviour : MonoBehaviour
             GetComponent<AudioSource>().Play();
             if (level == 1)
             {
-                print("1");
                 Rigidbody bulletClone = Instantiate(CannonBall, CannonBallSpawn.transform.position, CannonBallSpawn.transform.rotation);
                 bulletClone.velocity = transform.forward * CannonBallSpeed;
             }

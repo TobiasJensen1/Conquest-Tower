@@ -357,7 +357,7 @@ public class CFXEasyEditor : EditorWindow
 		//----------------------------------------------------------------
 			
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button(new GUIContent("Set Start Color(s)", "Changes the color(s) of the Particle System(s)\nSecond Color is used when Start Color is 'Random Between Two Colors'."),GUILayout.Width(120)))
+			if(GUILayout.Button(new GUIContent("Set Start Color(s)", "Changes the cannonColor(s) of the Particle System(s)\nSecond Color is used when Start Color is 'Random Between Two Colors'."),GUILayout.Width(120)))
 			{
 				applyColor();
 			}
@@ -373,7 +373,7 @@ public class CFXEasyEditor : EditorWindow
 			using(new EditorGUI.DisabledScope(!TintStartColor && !TintColorModule && !TintColorSpeedModule))
 			{
 				GUILayout.BeginHorizontal();
-				if(GUILayout.Button(new GUIContent("Tint Colors", "Colorize the Particle System(s) to a specific color, including gradients!\n(preserving their saturation and value)"), GUILayout.Width(120)))
+				if(GUILayout.Button(new GUIContent("Tint Colors", "Colorize the Particle System(s) to a specific cannonColor, including gradients!\n(preserving their saturation and value)"), GUILayout.Width(120)))
 				{
 					tintColor();
 				}
