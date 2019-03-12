@@ -9,19 +9,25 @@ public class CannonBulletCollision : MonoBehaviour
     float health;
     public float damage = 1f;
 
+    public GameObject Coins;
+
     public GameObject Explosion;
+
+   
 
 
     // Start is called before the first frame update
     void Start()
     {
-  
+
+
+   
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+      
     }
     
     void OnCollisionEnter(Collision collision)
@@ -63,20 +69,21 @@ public class CannonBulletCollision : MonoBehaviour
                
                 collision.gameObject.GetComponent<Animation>().Play("death1");
                 collision.gameObject.GetComponent<NavMeshAgent>().speed = 0;
-                     
-                    collision.gameObject.GetComponent<NpcStats>().health = 0;
+                Instantiate(Coins, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
+
+                collision.gameObject.GetComponent<NpcStats>().health = 0;
                 collision.gameObject.transform.GetChild(10).transform.GetComponent<TextMesh>().gameObject.SetActive(false);
 
                 collision.gameObject.tag = "End";
                 
 
-                Destroy(collision.gameObject,2);
+              Destroy(collision.gameObject,2);
 
-                //Destroy(collision.gameObject);
+                Destroy(collision.gameObject);
             }
         }
 
-        Destroy(this.gameObject, 5);
+       Destroy(this.gameObject, 5);
 
         
         

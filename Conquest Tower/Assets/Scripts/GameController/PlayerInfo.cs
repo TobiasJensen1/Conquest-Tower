@@ -13,6 +13,12 @@ public class PlayerInfo : MonoBehaviour
     public Text HealthText;
     public Text CoinsText;
 
+    public GameObject Pause_UI;
+    public GameObject ret_but;
+    public GameObject qu_but;
+    public GameObject gameovertext;
+    public GameObject pause;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +37,12 @@ public class PlayerInfo : MonoBehaviour
     {
         if(Health <= 0)
         {
-            SceneManager.LoadScene("ConquestTower");
+     Pause_UI.SetActive(true);
+     ret_but.SetActive(true);
+     qu_but.SetActive(true);
+     gameovertext.SetActive(true);
+     pause.SetActive(true);
+
         }
     }
 }
