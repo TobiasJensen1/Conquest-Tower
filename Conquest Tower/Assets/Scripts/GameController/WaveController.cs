@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class WaveController : MonoBehaviour
 {
@@ -36,13 +37,19 @@ public class WaveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
+
+
+      //  waveText.transform.DOScale(1, 50 * Time.deltaTime);
         if (wave == 5)
         {
-            waveText.text = "Final Wave!";
+          
         }
         else
         {
+
             waveText.text = "Wave " + waveCount;
+            
         }
     }
 
@@ -101,11 +108,18 @@ public class WaveController : MonoBehaviour
 
     IEnumerator startWave2()
     {
+        Tween myTween = waveText.DOColor(Color.red, 1);
+        yield return myTween.WaitForCompletion();
+        waveText.DOColor(Color.white, 1);
+
+
+
         informationText.text = "Wave 2 Incoming!";
         waveCount++;
         GetComponent<AudioSource>().Play();
         if (wave == 2)
         {
+           
             npcAmount = 5;
             button.GetComponent<Button>().interactable = false;
 
@@ -124,6 +138,9 @@ public class WaveController : MonoBehaviour
 
     IEnumerator startWave3()
     {
+        Tween myTween = waveText.DOColor(Color.red, 1);
+        yield return myTween.WaitForCompletion();
+        waveText.DOColor(Color.white, 1);
         informationText.text = "Wave 3 Incoming!";
         waveCount++;
         GetComponent<AudioSource>().Play();
@@ -146,6 +163,9 @@ public class WaveController : MonoBehaviour
     }
     IEnumerator startWave4()
     {
+        Tween myTween = waveText.DOColor(Color.red, 1);
+        yield return myTween.WaitForCompletion();
+        waveText.DOColor(Color.white, 1);
         informationText.text = "Wave 4 Incoming!";
         waveCount++;
         GetComponent<AudioSource>().Play();
@@ -168,11 +188,17 @@ public class WaveController : MonoBehaviour
     }
     IEnumerator startWave5()
     {
-        informationText.text = "Final Wave Incoming!";
+        waveText.text = "Final Wave!";
+        Tween myTween = waveText.DOColor(Color.red, 1);
+        yield return myTween.WaitForCompletion();
+         // waveText.text = "Final Wave!";
+        waveText.DOColor(Color.white, 1);
+        
         waveCount++;
         GetComponent<AudioSource>().Play();
         if (wave == 5)
         {
+            informationText.text = "Final Wave Incoming!";
             npcAmount = 20;
             button.GetComponent<Button>().interactable = false;
 

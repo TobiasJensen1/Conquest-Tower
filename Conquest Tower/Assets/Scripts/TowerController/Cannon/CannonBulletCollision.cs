@@ -74,6 +74,7 @@ public class CannonBulletCollision : MonoBehaviour
 
             if(collision.gameObject.GetComponent<NpcStats>().health <= 0)
             {
+                collision.gameObject.GetComponent<BoxCollider>().enabled = false;
                 GetComponent<AudioSource>().clip = dead;
                 GetComponent<AudioSource>().Play();
 

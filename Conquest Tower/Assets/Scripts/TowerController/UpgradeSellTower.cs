@@ -268,7 +268,7 @@ public class UpgradeSellTower : MonoBehaviour
                 
                 GetComponent<AudioSource>().Play();
             }
-            if (chosenTower.transform.gameObject.transform.GetChild(1).GetComponent<MageTowerBehaviour>().level == 2 && playerinfo.Coins >= 300)
+           else if (chosenTower.transform.gameObject.transform.GetChild(1).GetComponent<MageTowerBehaviour>().level == 2 && playerinfo.Coins >= 300)
             {
                 print("upgrade 2");
                 chosenTower.transform.gameObject.transform.GetChild(1).GetComponent<MageTowerBehaviour>().level++;
@@ -287,7 +287,7 @@ public class UpgradeSellTower : MonoBehaviour
 
                 GetComponent<AudioSource>().Play();
             }
-            if (chosenTower.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().level == 2 && playerinfo.Coins >= 300)
+           else if (chosenTower.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().level == 2 && playerinfo.Coins >= 300)
             {
                 chosenTower.transform.gameObject.transform.GetChild(1).GetComponent<CannonBehaviour>().level++;
                 playerinfo.Coins -= 300;
